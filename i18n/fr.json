@@ -1,0 +1,143 @@
+{
+  "auth": {
+    "welcome": "Bienvenue sur",
+    "appName": "Barkwendé",
+    "tagline": "Votre compagnon automobile de confiance",
+    "signIn": {
+      "title": "Connexion",
+      "subtitle": "Veuillez vous connecter pour continuer",
+      "email": "Email",
+      "password": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "button": "Se connecter",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "createAccount": "Créer un compte"
+    },
+    "signUp": {
+      "title": "Créer un compte",
+      "subtitle": "Inscrivez-vous pour commencer",
+      "fullName": "Nom complet",
+      "email": "Email",
+      "password": "Mot de passe",
+      "button": "Créer un compte",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter"
+    }
+  },
+  "common": {
+    "or": "ou",
+    "miles": "miles",
+    "lastCheck": "Dernier contrôle",
+    "healthScore": "Score de santé",
+    "status": {
+      "good": "Bon",
+      "warning": "Attention",
+      "critical": "Critique"
+    }
+  },
+  "tabs": {
+    "dashboard": "Tableau de bord",
+    "vehicles": "Véhicules",
+    "diagnostics": "Diagnostics",
+    "garages": "Garages",
+    "more": "Plus"
+  },
+  "dashboard": {
+    "vehicleHealth": "Santé du véhicule",
+    "upcomingMaintenance": "Entretien à venir",
+    "recentActivity": "Activité récente",
+    "runDiagnostics": "Lancer les diagnostics",
+    "logMaintenance": "Enregistrer l'entretien",
+    "daysLeft": "jours restants",
+    "day": "jour",
+    "days": "jours"
+  },
+  "vehicles": {
+    "myVehicles": "Mes véhicules",
+    "addVehicle": "Ajouter un véhicule",
+    "serviceRequired": "Entretien requis",
+    "issues": "problèmes",
+    "maintenance": "Entretien",
+    "repairs": "Réparations",
+    "history": "Historique",
+    "documents": "Documents",
+    "scheduleService": "Planifier l'entretien",
+    "repairHistory": "Historique des réparations",
+    "serviceHistory": "Historique des entretiens",
+    "viewDocuments": "Voir les documents",
+    "licensePlate": "Plaque d'immatriculation",
+    "color": "Couleur",
+    "fuelType": "Type de carburant",
+    "transmission": "Transmission"
+  },
+  "diagnostics": {
+    "title": "Diagnostics",
+    "obdConnection": "Connexion OBD",
+    "notConnected": "Non connecté",
+    "connecting": "Connexion en cours...",
+    "connected": "Connecté à",
+    "connectToOBD": "Connecter à l'OBDII",
+    "runDiagnostic": "Lancer le diagnostic",
+    "scanning": "Analyse en cours...",
+    "diagnosticResults": "Résultats du diagnostic",
+    "newScan": "Nouvelle analyse",
+    "detectedIssues": "Problèmes détectés",
+    "systemStatus": "État du système",
+    "possibleCauses": "Causes possibles",
+    "recommendedActions": "Actions recommandées",
+    "viewRepairGuide": "Voir le guide de réparation",
+    "severity": "Gravité",
+    "causes": {
+      "sparkPlugs": "Bougies usées",
+      "fuelInjectors": "Injecteurs de carburant bouchés",
+      "ignitionCoil": "Bobine d'allumage défectueuse",
+      "fuelPressure": "Pression de carburant faible"
+    },
+    "actions": {
+      "inspectSparkPlugs": "Inspecter et remplacer les bougies si nécessaire",
+      "checkFuelInjectors": "Nettoyer ou remplacer les injecteurs",
+      "testIgnitionCoil": "Tester et remplacer la bobine d'allumage si défectueuse"
+    }
+  },
+  "garages": {
+    "nearbyGarages": "Garages à proximité",
+    "searchGarages": "Rechercher des garages...",
+    "list": "Liste",
+    "map": "Carte",
+    "reviews": "avis",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "call": "Appeler",
+    "directions": "Itinéraire",
+    "services": "Services"
+  },
+  "more": {
+    "features": "Fonctionnalités",
+    "preferences": "Préférences",
+    "support": "Support",
+    "repairTutorials": "Tutoriels de réparation",
+    "maintenanceHistory": "Historique d'entretien",
+    "performanceReports": "Rapports de performance",
+    "vehicleDocuments": "Documents du véhicule",
+    "settings": "Paramètres",
+    "notifications": "Notifications",
+    "privacy": "Confidentialité",
+    "helpCenter": "Centre d'aide",
+    "contactSupport": "Contacter le support",
+    "logout": "Déconnexion",
+    "version": "Version"
+  },
+  "maintenance": {
+    "title": "Calendrier d'entretien",
+    "upcoming": "Services à venir",
+    "schedule": "Planifier l'entretien",
+    "addNew": "Ajouter un service",
+    "estimatedCost": "Coût estimé",
+    "status": {
+      "upcoming": "À venir",
+      "scheduled": "Planifié",
+      "overdue": "En retard",
+      "completed": "Terminé"
+    }
+  }
+}

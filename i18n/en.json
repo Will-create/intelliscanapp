@@ -1,0 +1,143 @@
+{
+  "auth": {
+    "welcome": "Welcome to",
+    "appName": "Barkwendé",
+    "tagline": "Your trusted vehicle companion",
+    "signIn": {
+      "title": "Sign In",
+      "subtitle": "Please sign in to continue",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot Password?",
+      "button": "Sign In",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create Account"
+    },
+    "signUp": {
+      "title": "Create Account",
+      "subtitle": "Sign up to get started",
+      "fullName": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "button": "Create Account",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign In"
+    }
+  },
+  "common": {
+    "or": "or",
+    "miles": "miles",
+    "lastCheck": "Last Check",
+    "healthScore": "Health Score",
+    "status": {
+      "good": "Good",
+      "warning": "Warning",
+      "critical": "Critical"
+    }
+  },
+  "tabs": {
+    "dashboard": "Dashboard",
+    "vehicles": "Vehicles",
+    "diagnostics": "Diagnostics",
+    "garages": "Garages",
+    "more": "More"
+  },
+  "dashboard": {
+    "vehicleHealth": "Vehicle Health",
+    "upcomingMaintenance": "Upcoming Maintenance",
+    "recentActivity": "Recent Activity",
+    "runDiagnostics": "Run Diagnostics",
+    "logMaintenance": "Log Maintenance",
+    "daysLeft": "days left",
+    "day": "day",
+    "days": "days"
+  },
+  "vehicles": {
+    "myVehicles": "My Vehicles",
+    "addVehicle": "Add Vehicle",
+    "serviceRequired": "Service Required",
+    "issues": "issues",
+    "maintenance": "Maintenance",
+    "repairs": "Repairs",
+    "history": "History",
+    "documents": "Documents",
+    "scheduleService": "Schedule Service",
+    "repairHistory": "Repair History",
+    "serviceHistory": "Service History",
+    "viewDocuments": "View Documents",
+    "licensePlate": "License Plate",
+    "color": "Color",
+    "fuelType": "Fuel Type",
+    "transmission": "Transmission"
+  },
+  "diagnostics": {
+    "title": "Diagnostics",
+    "obdConnection": "OBD Connection",
+    "notConnected": "Not Connected",
+    "connecting": "Connecting...",
+    "connected": "Connected to",
+    "connectToOBD": "Connect to OBDII",
+    "runDiagnostic": "Run Diagnostic",
+    "scanning": "Scanning...",
+    "diagnosticResults": "Diagnostic Results",
+    "newScan": "New Scan",
+    "detectedIssues": "Detected Issues",
+    "systemStatus": "System Status",
+    "possibleCauses": "Possible Causes",
+    "recommendedActions": "Recommended Actions",
+    "viewRepairGuide": "View Repair Guide",
+    "severity": "Severity",
+    "causes": {
+      "sparkPlugs": "Worn spark plugs",
+      "fuelInjectors": "Clogged fuel injectors",
+      "ignitionCoil": "Faulty ignition coil",
+      "fuelPressure": "Low fuel pressure"
+    },
+    "actions": {
+      "inspectSparkPlugs": "Inspect and replace spark plugs if necessary",
+      "checkFuelInjectors": "Clean or replace fuel injectors",
+      "testIgnitionCoil": "Test and replace ignition coil if faulty"
+    }
+  },
+  "garages": {
+    "nearbyGarages": "Nearby Garages",
+    "searchGarages": "Search for garages...",
+    "list": "List",
+    "map": "Map",
+    "reviews": "reviews",
+    "open": "Open",
+    "closed": "Closed",
+    "call": "Call",
+    "directions": "Directions",
+    "services": "Services"
+  },
+  "more": {
+    "features": "Features",
+    "preferences": "Preferences",
+    "support": "Support",
+    "repairTutorials": "Repair Tutorials",
+    "maintenanceHistory": "Maintenance History",
+    "performanceReports": "Performance Reports",
+    "vehicleDocuments": "Vehicle Documents",
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "helpCenter": "Help Center",
+    "contactSupport": "Contact Support",
+    "logout": "Log Out",
+    "version": "Version"
+  },
+  "maintenance": {
+    "title": "Maintenance Schedule",
+    "upcoming": "Upcoming Services",
+    "schedule": "Schedule Service",
+    "addNew": "Add New Service",
+    "estimatedCost": "Estimated Cost",
+    "status": {
+      "upcoming": "Upcoming",
+      "scheduled": "Scheduled",
+      "overdue": "Overdue",
+      "completed": "Completed"
+    }
+  }
+}
