@@ -6,7 +6,7 @@ import { VehicleCard } from '@/components/VehicleCard';
 import { HealthStatus } from '@/components/HealthStatus';
 import { MaintenanceReminder } from '@/components/MaintenanceReminder';
 import { RecentActivity } from '@/components/RecentActivity';
-import { CircleAlert as AlertCircle, Check, Info } from 'lucide-react-native';
+import { AlertCircle, Check, Info } from 'lucide-react-native';
 
 export default function DashboardScreen() {
   const { t } = useTranslation();

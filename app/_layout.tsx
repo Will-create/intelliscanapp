@@ -33,12 +33,15 @@ export default function RootLayout() {
     return null;
   }
 
+
   return (
     <>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="vehicles/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="vehicles/[id]/maintenance" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" options={{ presentation: 'modal' }} />
       </Stack>
       <StatusBar style="auto" />

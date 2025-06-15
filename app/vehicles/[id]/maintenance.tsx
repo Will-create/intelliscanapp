@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-nati
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import Colors from '@/constants/Colors';
-import { ArrowLeft, Calendar, PenTool as Tool, Clock, CircleAlert as AlertCircle } from 'lucide-react-native';
+import { ArrowLeft, Calendar, PenTool as Tool, Clock,  AlertCircle } from 'lucide-react-native';
 
 export default function MaintenanceScreen() {
   const { id } = useLocalSearchParams();

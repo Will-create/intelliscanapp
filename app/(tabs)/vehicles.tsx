@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, FlatList }
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import Colors from '@/constants/Colors';
-import { Gauge, TriangleAlert as AlertTriangle, Clock, CirclePlus as PlusCircle } from 'lucide-react-native';
+import { Gauge, AlertTriangle, Clock, PlusCircle } from 'lucide-react-native';
 import { StatusBadge } from '@/components/StatusBadge';
 
 export default function VehiclesScreen() {
@@ -50,7 +50,7 @@ export default function VehiclesScreen() {
     }
   ]);
 
-  const renderVehicleCard = ({ item }) => (
+  const renderVehicleCard = ({ item }: any) => (
     <TouchableOpacity style={styles.vehicleCard}>
       <Image source={{ uri: item.image }} style={styles.vehicleImage} />
       <View style={styles.vehicleInfo}>
@@ -85,7 +85,7 @@ export default function VehiclesScreen() {
     </TouchableOpacity>
   );
 
-  const getHealthColor = (score) => {
+  const getHealthColor = (score: any) => {
     if (score >= 80) return Colors.success;
     if (score >= 60) return Colors.warning;
     return Colors.error;

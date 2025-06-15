@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Switch, Image } f
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import Colors from '@/constants/Colors';
-import { BookOpen, ChevronRight, Settings, CircleHelp as HelpCircle, FileCog, Bell, History, Gauge, MessageSquare, ShieldCheck, LogOut } from 'lucide-react-native';
+import { BookOpen, ChevronRight, Settings, HelpCircle, FileCog, Bell, History, Gauge, MessageSquare, ShieldCheck, LogOut } from 'lucide-react-native';
 
 export default function MoreScreen() {
   const { t } = useTranslation();
