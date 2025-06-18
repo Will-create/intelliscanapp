@@ -17,7 +17,7 @@ export function LanguageSelector() {
       onPress={toggleLanguage}
     >
       <Text style={styles.text}>
-        {i18n.language === 'fr' ? 'EN' : 'FR'}
+        {i18n.language === 'fr' ? '🇬🇧' : '🇫🇷'}
       </Text>
     </TouchableOpacity>
   );
@@ -26,13 +26,13 @@ export function LanguageSelector() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.backgroundSecondary,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingHorizontal: 10,
+    paddingVertical: 1,
     borderRadius: 16,
   },
   text: {
     fontFamily: 'Montserrat-Bold',
-    fontSize: 12,
+    fontSize: 25,
     color: Colors.accent,
   },
 });

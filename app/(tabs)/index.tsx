@@ -67,7 +67,7 @@ export default function DashboardScreen() {
           <Text style={styles.headerTitle}>{t('tabs.dashboard')}</Text>
           <TouchableOpacity style={styles.profileButton}>
             <Image 
-              source={{ uri: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg' }} 
+            source={{ uri: 'https://media.licdn.com/dms/image/v2/D4E03AQGyrmYxD7MgaA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719234187843?e=1755734400&v=beta&t=olkXB7gLxHFN5eLbaWaFJmlMlAwHS0NcpW_nYud9-8s' }} 
               style={styles.profileImage} 
             />
           </TouchableOpacity>

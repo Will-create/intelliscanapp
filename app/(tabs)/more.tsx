@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Switch, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
+import { Link, useRouter } from 'expo-router';
+
 import Colors from '@/constants/Colors';
 import { BookOpen, ChevronRight, Settings, HelpCircle, FileCog, Bell, History, Gauge, MessageSquare, ShieldCheck, LogOut } from 'lucide-react-native';
 
@@ -17,12 +19,12 @@ export default function MoreScreen() {
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
         <View style={styles.profileSection}>
           <Image 
-            source={{ uri: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg' }} 
+            source={{ uri: 'https://media.licdn.com/dms/image/v2/D4E03AQGyrmYxD7MgaA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719234187843?e=1755734400&v=beta&t=olkXB7gLxHFN5eLbaWaFJmlMlAwHS0NcpW_nYud9-8s' }} 
             style={styles.profileImage} 
           />
           <View style={styles.profileInfo}>
-            <Text style={styles.profileName}>John Smith</Text>
-            <Text style={styles.profileEmail}>john.smith@example.com</Text>
+            <Text style={styles.profileName}>Apolos ZOMBRE</Text>
+            <Text style={styles.profileEmail}>apoloszombre@gmail.com</Text>
           </View>
           <TouchableOpacity style={styles.profileEditButton}>
             <Text style={styles.profileEditButtonText}>Edit</Text>
@@ -142,10 +144,13 @@ export default function MoreScreen() {
           </View>
         </View>
         
-        <TouchableOpacity style={styles.logoutButton}>
+        <Link href="/login" asChild>
+                            <TouchableOpacity style={styles.logoutButton}>
           <LogOut size={20} color={Colors.error} />
           <Text style={styles.logoutText}>{t('more.logout')}</Text>
         </TouchableOpacity>
+              </Link>
+   
         
         <Text style={styles.versionText}>{t('more.version')} 1.0.0</Text>
       </ScrollView>
@@ -189,8 +194,8 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   profileImage: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 30,
   },
   profileInfo: {

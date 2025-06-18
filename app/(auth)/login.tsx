@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import Colors from '@/constants/Colors';
 import { Mail, Lock, ArrowRight } from 'lucide-react-native';
 import { LanguageSelector } from '@/components/LanguageSelector';
-
 const { width } = Dimensions.get('window');
 
 export default function LoginScreen() {
@@ -30,19 +29,16 @@ export default function LoginScreen() {
       >
         <View style={styles.header}>
           <Image 
-            source={{ uri: 'https://images.pexels.com/photos/244206/pexels-photo-244206.jpeg' }}
+            source={require('../../assets/images/icon.jpg')}
             style={styles.headerImage}
           />
           <View style={styles.overlay}>
-            <View style={styles.gradientOverlay} />
           </View>
           <View style={styles.headerContent}>
             <View style={styles.languageSelectorContainer}>
               <LanguageSelector />
             </View>
-            <Text style={styles.welcomeText}>{t('auth.welcome')}</Text>
-            <Text style={styles.title}>{t('auth.appName')}</Text>
-            <Text style={styles.subtitle}>{t('auth.tagline')}</Text>
+            
           </View>
         </View>
 
