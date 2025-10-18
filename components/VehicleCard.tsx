@@ -7,14 +7,14 @@ import { ChevronRight } from 'lucide-react-native';
 
 interface VehicleCardProps {
   vehicle: {
-    id: string;
-    name: string;
+    id: number;
     make: string;
     model: string;
     year: number;
-    image: string;
+    nickname: string;
     mileage: number;
-    lastCheck: string;
+    image: string;
+    created_at: string;
   };
 }
 
@@ -22,16 +22,16 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
   const router = useRouter();
   const { t, i18n } = useTranslation();
 
-  const formattedDate = new Date(vehicle.lastCheck).toLocaleDateString(
+  const formattedDate = new Date(vehicle.created_at).toLocaleDateString(
     i18n.language === 'fr' ? 'fr-FR' : 'en-US',
     {
       month: 'short',
       day: 'numeric',
-    }
+    },
   );
 
   const handlePress = () => {
-    router.push(`/vehicles/${vehicle.id}`);
+    router.push(`/vehicles/${vehicle.id.toString()}`);
   };
 
   return (
@@ -39,7 +39,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
       <Image source={{ uri: vehicle.image }} style={styles.vehicleImage} />
       <View style={styles.infoContainer}>
         <View style={styles.headerRow}>
-          <Text style={styles.vehicleName}>{vehicle.name}</Text>
+          <Text style={styles.vehicleName}>{vehicle.nickname || `${vehicle.year} ${vehicle.make} ${vehicle.model}`}</Text>
           <ChevronRight size={20} color={Colors.textSecondary} />
         </View>
         <Text style={styles.vehicleDetails}>
@@ -48,7 +48,7 @@ export function VehicleCard({ vehicle }: VehicleCardProps) {
         <View style={styles.statsRow}>
           <View style={styles.stat}>
             <Text style={styles.statValue}>
-              {vehicle.mileage.toLocaleString()}
+              {vehicle.mileage ? vehicle.mileage.toLocaleString() : 'N/A'}
             </Text>
             <Text style={styles.statLabel}>{t('common.miles')}</Text>
           </View>

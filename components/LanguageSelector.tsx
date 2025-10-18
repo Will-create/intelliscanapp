@@ -12,13 +12,8 @@ export function LanguageSelector() {
   };
 
   return (
-    <TouchableOpacity 
-      style={styles.container} 
-      onPress={toggleLanguage}
-    >
-      <Text style={styles.text}>
-        {i18n.language === 'fr' ? '🇬🇧' : '🇫🇷'}
-      </Text>
+    <TouchableOpacity style={styles.container} onPress={toggleLanguage}>
+      <Text style={styles.text}>{i18n.language === 'fr' ? '🇬🇧' : '🇫🇷'}</Text>
     </TouchableOpacity>
   );
 }

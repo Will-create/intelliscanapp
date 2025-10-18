@@ -1,0 +1,13 @@
+{
+  "servers": [
+    {
+      "name": "vehicle-management",
+      "type": "stdio",
+      "command": "node",
+      "args": ["./mcp/vehicle-management-server.js"],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

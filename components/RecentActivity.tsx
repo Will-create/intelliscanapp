@@ -9,7 +9,7 @@ interface RecentActivityProps {
     date: string;
     description: string;
     issues: number;
-    Icon: React.ComponentType<{ size: number; color: string; }>;
+    Icon: React.ComponentType<{ size: number; color: string }>;
     color: string;
   };
 }
@@ -17,19 +17,24 @@ interface RecentActivityProps {
 export function RecentActivity({ activity }: RecentActivityProps) {
   const { t, i18n } = useTranslation();
   const { Icon } = activity;
-  
+
   const formattedDate = new Date(activity.date).toLocaleDateString(
     i18n.language === 'fr' ? 'fr-FR' : 'en-US',
     {
       month: 'short',
       day: 'numeric',
       year: 'numeric',
-    }
+    },
   );
 
   return (
     <TouchableOpacity style={styles.container}>
-      <View style={[styles.iconContainer, { backgroundColor: activity.color + '15' }]}>
+      <View
+        style={[
+          styles.iconContainer,
+          { backgroundColor: activity.color + '15' },
+        ]}
+      >
         <Icon size={20} color={activity.color} />
       </View>
       <View style={styles.infoContainer}>

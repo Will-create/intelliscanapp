@@ -20,9 +20,9 @@ export function MaintenanceReminder({ item }: MaintenanceReminderProps) {
   return (
     <TouchableOpacity style={styles.container}>
       <View style={styles.iconContainer}>
-        <Calendar 
-          size={20} 
-          color={item.critical ? Colors.error : Colors.accent} 
+        <Calendar
+          size={20}
+          color={item.critical ? Colors.error : Colors.accent}
         />
       </View>
       <View style={styles.infoContainer}>
@@ -30,7 +30,8 @@ export function MaintenanceReminder({ item }: MaintenanceReminderProps) {
         <Text style={styles.dueDate}>
           {t('dashboard.daysLeft', {
             count: item.daysLeft,
-            days: item.daysLeft === 1 ? t('dashboard.day') : t('dashboard.days')
+            days:
+              item.daysLeft === 1 ? t('dashboard.day') : t('dashboard.days'),
           })}
         </Text>
       </View>

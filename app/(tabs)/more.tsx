@@ -1,14 +1,75 @@
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Switch, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Switch,
+  Image,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { Link, useRouter } from 'expo-router';
+import { supabase } from '@/utils/supabase';
+import { useProfile } from '@/hooks/useProfile';
+import { useNotifications } from '@/hooks/useNotifications';
 
 import Colors from '@/constants/Colors';
-import { BookOpen, ChevronRight, Settings, HelpCircle, FileCog, Bell, History, Gauge, MessageSquare, ShieldCheck, LogOut } from 'lucide-react-native';
+import {
+  BookOpen,
+  ChevronRight,
+  Settings,
+  HelpCircle,
+  FileCog,
+  Bell,
+  History,
+  Gauge,
+  MessageSquare,
+  ShieldCheck,
+  LogOut,
+} from 'lucide-react-native';
 
 export default function MoreScreen() {
   const { t } = useTranslation();
+  const router = useRouter();
+  const { profile, loading: profileLoading } = useProfile();
+  const { notifications, loading: notificationsLoading, updateNotificationPreference } = useNotifications();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+
+  useEffect(() => {
+    if (notifications) {
+      setNotificationsEnabled(notifications.push_notifications);
+    }
+  }, [notifications]);
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Error signing out:', error.message);
+    } else {
+      router.replace('/(auth)/login');
+    }
+  };
+
+  const toggleNotifications = async () => {
+    const newValue = !notificationsEnabled;
+    setNotificationsEnabled(newValue);
+    await updateNotificationPreference('push_notifications', newValue);
+  };
+
+  if (profileLoading || notificationsLoading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>{t('tabs.more')}</Text>
+        </View>
+        <View style={styles.loadingContainer}>
+          <Text>Loading...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -16,15 +77,20 @@ export default function MoreScreen() {
         <Text style={styles.headerTitle}>{t('tabs.more')}</Text>
       </View>
 
-      <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+      >
         <View style={styles.profileSection}>
-          <Image 
-            source={{ uri: 'https://media.licdn.com/dms/image/v2/D4E03AQGyrmYxD7MgaA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719234187843?e=1755734400&v=beta&t=olkXB7gLxHFN5eLbaWaFJmlMlAwHS0NcpW_nYud9-8s' }} 
-            style={styles.profileImage} 
+          <Image
+            source={{
+              uri: profile?.avatar_url || 'https://media.licdn.com/dms/image/v2/D4E03AQGyrmYxD7MgaA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719234187843?e=1755734400&v=beta&t=olkXB7gLxHFN5eLbaWaFJmlMlAwHS0NcpW_nYud9-8s',
+            }}
+            style={styles.profileImage}
           />
           <View style={styles.profileInfo}>
-            <Text style={styles.profileName}>Apolos ZOMBRE</Text>
-            <Text style={styles.profileEmail}>apoloszombre@gmail.com</Text>
+            <Text style={styles.profileName}>{profile?.full_name || 'User'}</Text>
+            <Text style={styles.profileEmail}>{profile?.email || 'user@example.com'}</Text>
           </View>
           <TouchableOpacity style={styles.profileEditButton}>
             <Text style={styles.profileEditButtonText}>Edit</Text>
@@ -33,45 +99,52 @@ export default function MoreScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('more.features')}</Text>
-          
+
           <View style={styles.menuCard}>
-            <TouchableOpacity style={styles.menuItem}>
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/(tabs)/tutorials')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#f1f9ff' }]}>
                   <BookOpen size={20} color="#0077e6" />
                 </View>
-                <Text style={styles.menuItemText}>{t('more.repairTutorials')}</Text>
+                <Text style={styles.menuItemText}>
+                  {t('more.repairTutorials')}
+                </Text>
               </View>
               <ChevronRight size={20} color={Colors.textSecondary} />
-            
             </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.menuItem}>
+
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/vehicles/1/maintenance')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#fff5f5' }]}>
                   <History size={20} color="#e53935" />
                 </View>
-                <Text style={styles.menuItemText}>{t('more.maintenanceHistory')}</Text>
+                <Text style={styles.menuItemText}>
+                  {t('more.maintenanceHistory')}
+                </Text>
               </View>
               <ChevronRight size={20} color={Colors.textSecondary} />
             </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.menuItem}>
+
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/vehicles/1/upcoming')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#fafef5' }]}>
                   <Gauge size={20} color="#7cb342" />
                 </View>
-                <Text style={styles.menuItemText}>{t('more.performanceReports')}</Text>
+                <Text style={styles.menuItemText}>
+                  {t('more.performanceReports')}
+                </Text>
               </View>
               <ChevronRight size={20} color={Colors.textSecondary} />
             </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.menuItem}>
+
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/vehicles/1/documents')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#fef8f0' }]}>
                   <FileCog size={20} color="#f57c00" />
                 </View>
-                <Text style={styles.menuItemText}>{t('more.vehicleDocuments')}</Text>
+                <Text style={styles.menuItemText}>
+                  {t('more.vehicleDocuments')}
+                </Text>
               </View>
               <ChevronRight size={20} color={Colors.textSecondary} />
             </TouchableOpacity>
@@ -80,9 +153,9 @@ export default function MoreScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('more.preferences')}</Text>
-          
+
           <View style={styles.menuCard}>
-            <TouchableOpacity style={styles.menuItem}>
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/(tabs)/settings')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#f5f5f5' }]}>
                   <Settings size={20} color="#616161" />
@@ -91,22 +164,28 @@ export default function MoreScreen() {
               </View>
               <ChevronRight size={20} color={Colors.textSecondary} />
             </TouchableOpacity>
-            
+
             <View style={styles.menuItem}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#f1f9ff' }]}>
                   <Bell size={20} color="#0077e6" />
                 </View>
-                <Text style={styles.menuItemText}>{t('more.notifications')}</Text>
+                <Text style={styles.menuItemText}>
+                  {t('more.notifications')}
+                </Text>
               </View>
-              <Switch 
-                trackColor={{ false: Colors.backgroundSecondary, true: Colors.accent + '50' }}
-                thumbColor={true ? Colors.accent : '#f4f3f4'}
-                value={true}
+              <Switch
+                trackColor={{
+                  false: Colors.backgroundSecondary,
+                  true: Colors.accent + '50',
+                }}
+                thumbColor={notificationsEnabled ? Colors.accent : '#f4f3f4'}
+                value={notificationsEnabled}
+                onValueChange={toggleNotifications}
               />
             </View>
-            
-            <TouchableOpacity style={styles.menuItem}>
+
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/(tabs)/privacy')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#f0f4fa' }]}>
                   <ShieldCheck size={20} color="#3949ab" />
@@ -120,9 +199,9 @@ export default function MoreScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('more.support')}</Text>
-          
+
           <View style={styles.menuCard}>
-            <TouchableOpacity style={styles.menuItem}>
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/(tabs)/help')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#f5f0fa' }]}>
                   <HelpCircle size={20} color="#8e24aa" />
@@ -131,27 +210,26 @@ export default function MoreScreen() {
               </View>
               <ChevronRight size={20} color={Colors.textSecondary} />
             </TouchableOpacity>
-            
-            <TouchableOpacity style={styles.menuItem}>
+
+            <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/(tabs)/contact')}>
               <View style={styles.menuItemLeft}>
                 <View style={[styles.menuIcon, { backgroundColor: '#f0faf4' }]}>
                   <MessageSquare size={20} color="#43a047" />
                 </View>
-                <Text style={styles.menuItemText}>{t('more.contactSupport')}</Text>
+                <Text style={styles.menuItemText}>
+                  {t('more.contactSupport')}
+                </Text>
               </View>
               <ChevronRight size={20} color={Colors.textSecondary} />
             </TouchableOpacity>
           </View>
         </View>
-        
-        <Link href="/login" asChild>
-                            <TouchableOpacity style={styles.logoutButton}>
+
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <LogOut size={20} color={Colors.error} />
           <Text style={styles.logoutText}>{t('more.logout')}</Text>
         </TouchableOpacity>
-              </Link>
-   
-        
+
         <Text style={styles.versionText}>{t('more.version')} 1.0.0</Text>
       </ScrollView>
     </SafeAreaView>
@@ -299,5 +377,10 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     textAlign: 'center',
     marginBottom: 24,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

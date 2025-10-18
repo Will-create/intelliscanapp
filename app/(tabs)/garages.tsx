@@ -1,10 +1,35 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Platform, FlatList } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTranslation } from 'react-i18next';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Platform,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
+
+// ... (imports)
+
 import Colors from '@/constants/Colors';
-import { Search, MapPin, Phone, Clock, Star, Navigation } from 'lucide-react-native';
+
+// ... (imports)
+
+import { useTranslation } from 'react-i18next';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  Search,
+  MapPin,
+  Phone,
+  Clock,
+  Star,
+  Navigation,
+} from 'lucide-react-native';
 import { GarageListItem } from '@/components/GarageListItem';
+
+import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/utils/supabase';
 
 const MapPlaceholder = () => {
   const { t } = useTranslation();
@@ -21,63 +46,39 @@ const MapPlaceholder = () => {
 
 export default function GaragesScreen() {
   const { t } = useTranslation();
-  const [selectedView, setSelectedView] = useState('list');
+  const { session } = useAuth();
+  const [garages, setGarages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [selectedGarage, setSelectedGarage] = useState(null);
-  
-  const garages = [
-    {
-      id: '1',
-      name: 'AutoTech Repairs',
-      rating: 4.8,
-      reviews: 124,
-      distance: 1.2,
-      address: '123 Main Street, Cityville',
-      phone: '(555) 123-4567',
-      hours: '8:00 AM - 6:00 PM',
-      services: ['Diagnostics', 'Engine Repair', 'Oil Change', 'Brakes'],
-      isOpen: true,
-    },
-    {
-      id: '2',
-      name: 'Quick Fix Garage',
-      rating: 4.3,
-      reviews: 89,
-      distance: 2.5,
-      address: '456 Oak Avenue, Townsville',
-      phone: '(555) 987-6543',
-      hours: '7:30 AM - 5:30 PM',
-      services: ['Tire Service', 'AC Repair', 'Battery Replacement'],
-      isOpen: true,
-    },
-    {
-      id: '3',
-      name: 'Premium Auto Care',
-      rating: 4.9,
-      reviews: 210,
-      distance: 3.8,
-      address: '789 Pine Road, Villageton',
-      phone: '(555) 456-7890',
-      hours: '8:00 AM - 7:00 PM',
-      services: ['Full Service', 'Electrical', 'Transmission'],
-      isOpen: false,
-    },
-    {
-      id: '4',
-      name: 'City Mechanics',
-      rating: 4.1,
-      reviews: 76,
-      distance: 4.2,
-      address: '101 Cedar Lane, Hamletville',
-      phone: '(555) 234-5678',
-      hours: '9:00 AM - 6:00 PM',
-      services: ['Engine Repair', 'Oil Change', 'Diagnostics'],
-      isOpen: true,
-    },
-  ];
+  const [selectedView, setSelectedView] = useState('list');
+
+  useEffect(() => {
+    if (session) {
+      const getGarages = async () => {
+        const { data, error } = await supabase
+          .from('garages')
+          .select('*')
+          .eq('user_id', session.user.id);
+
+        if (error) {
+          console.error('Error fetching garages:', error.message);
+        } else {
+          setGarages(data);
+        }
+        setLoading(false);
+      };
+
+      getGarages();
+    }
+  }, [session]);
 
   const handleGarageSelect = (garage) => {
     setSelectedGarage(garage);
   };
+
+  if (loading) {
+    return <ActivityIndicator />;
+  }
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -88,32 +89,42 @@ export default function GaragesScreen() {
       <View style={styles.searchContainer}>
         <View style={styles.searchBar}>
           <Search size={20} color={Colors.textSecondary} />
-          <Text style={styles.searchPlaceholder}>{t('garages.searchGarages')}</Text>
+          <Text style={styles.searchPlaceholder}>
+            {t('garages.searchGarages')}
+          </Text>
         </View>
         <View style={styles.viewToggle}>
           <TouchableOpacity
             style={[
               styles.toggleButton,
-              selectedView === 'list' && styles.toggleButtonActive
+              selectedView === 'list' && styles.toggleButtonActive,
             ]}
             onPress={() => setSelectedView('list')}
           >
-            <Text style={[
-              styles.toggleButtonText,
-              selectedView === 'list' && styles.toggleButtonTextActive
-            ]}>{t('garages.list')}</Text>
+            <Text
+              style={[
+                styles.toggleButtonText,
+                selectedView === 'list' && styles.toggleButtonTextActive,
+              ]}
+            >
+              {t('garages.list')}
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[
               styles.toggleButton,
-              selectedView === 'map' && styles.toggleButtonActive
+              selectedView === 'map' && styles.toggleButtonActive,
             ]}
             onPress={() => setSelectedView('map')}
           >
-            <Text style={[
-              styles.toggleButtonText,
-              selectedView === 'map' && styles.toggleButtonTextActive
-            ]}>{t('garages.map')}</Text>
+            <Text
+              style={[
+                styles.toggleButtonText,
+                selectedView === 'map' && styles.toggleButtonTextActive,
+              ]}
+            >
+              {t('garages.map')}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -126,8 +137,8 @@ export default function GaragesScreen() {
             data={garages}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
-              <GarageListItem 
-                garage={item} 
+              <GarageListItem
+                garage={item}
                 onPress={() => handleGarageSelect(item)}
                 isSelected={selectedGarage?.id === item.id}
               />
@@ -146,25 +157,40 @@ export default function GaragesScreen() {
               <View style={styles.ratingContainer}>
                 <Star size={16} color={Colors.accent} fill={Colors.accent} />
                 <Text style={styles.ratingText}>
-                  {selectedGarage.rating} ({selectedGarage.reviews} {t('garages.reviews')})
+                  {selectedGarage.rating} ({selectedGarage.reviews}{' '}
+                  {t('garages.reviews')})
                 </Text>
               </View>
             </View>
             <View style={styles.badgeContainer}>
-              <View style={[
-                styles.statusBadge, 
-                { backgroundColor: selectedGarage.isOpen ? Colors.success + '20' : Colors.error + '20' }
-              ]}>
-                <Text style={[
-                  styles.statusText,
-                  { color: selectedGarage.isOpen ? Colors.success : Colors.error }
-                ]}>
-                  {selectedGarage.isOpen ? t('garages.open') : t('garages.closed')}
+              <View
+                style={[
+                  styles.statusBadge,
+                  {
+                    backgroundColor: selectedGarage.isOpen
+                      ? Colors.success + '20'
+                      : Colors.error + '20',
+                  },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.statusText,
+                    {
+                      color: selectedGarage.isOpen
+                        ? Colors.success
+                        : Colors.error,
+                    },
+                  ]}
+                >
+                  {selectedGarage.isOpen
+                    ? t('garages.open')
+                    : t('garages.closed')}
                 </Text>
               </View>
             </View>
           </View>
-          
+
           <View style={styles.garageInfo}>
             <View style={styles.infoRow}>
               <MapPin size={16} color={Colors.textSecondary} />
@@ -179,7 +205,7 @@ export default function GaragesScreen() {
               <Text style={styles.infoText}>{selectedGarage.phone}</Text>
             </View>
           </View>
-          
+
           <View style={styles.serviceContainer}>
             <Text style={styles.serviceTitle}>{t('garages.services')}</Text>
             <View style={styles.serviceTagsContainer}>
@@ -190,7 +216,7 @@ export default function GaragesScreen() {
               ))}
             </View>
           </View>
-          
+
           <View style={styles.actionButtons}>
             <TouchableOpacity style={styles.actionButton}>
               <Phone size={20} color={Colors.white} />
@@ -198,7 +224,9 @@ export default function GaragesScreen() {
             </TouchableOpacity>
             <TouchableOpacity style={styles.actionButton}>
               <Navigation size={20} color={Colors.white} />
-              <Text style={styles.actionButtonText}>{t('garages.directions')}</Text>
+              <Text style={styles.actionButtonText}>
+                {t('garages.directions')}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>

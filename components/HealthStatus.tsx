@@ -31,22 +31,24 @@ export function HealthStatus({ score }: HealthStatusProps) {
       <View style={styles.scoreHeader}>
         <Text style={styles.scoreLabel}>{t('common.healthScore')}</Text>
         <View style={styles.scoreCircle}>
-          <Text style={[styles.scoreValue, { color: healthColor }]}>{score}</Text>
+          <Text style={[styles.scoreValue, { color: healthColor }]}>
+            {score}
+          </Text>
         </View>
       </View>
-      
+
       <View style={styles.statusInfo}>
         <Text style={[styles.statusText, { color: healthColor }]}>
           {healthStatus}
         </Text>
       </View>
-      
+
       <View style={styles.progressBar}>
-        <View 
+        <View
           style={[
-            styles.progressFill, 
-            { width: fillWidth, backgroundColor: healthColor }
-          ]} 
+            styles.progressFill,
+            { width: fillWidth, backgroundColor: healthColor },
+          ]}
         />
       </View>
     </View>

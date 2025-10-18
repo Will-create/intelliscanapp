@@ -2,7 +2,7 @@
   "auth": {
     "welcome": "Bienvenue sur",
     "appName": "Barkwendé",
-    "tagline": "Votre compagnon automobile de confiance",
+    "tagline": "Votre compagnon de confiance pour votre véhicule",
     "signIn": {
       "title": "Connexion",
       "subtitle": "Veuillez vous connecter pour continuer",
@@ -10,6 +10,7 @@
       "password": "Mot de passe",
       "forgotPassword": "Mot de passe oublié ?",
       "button": "Se connecter",
+      "google": "Se connecter avec Google",
       "noAccount": "Vous n'avez pas de compte ?",
       "createAccount": "Créer un compte"
     },
@@ -20,18 +21,40 @@
       "email": "Email",
       "password": "Mot de passe",
       "button": "Créer un compte",
+      "google": "S'inscrire avec Google",
       "haveAccount": "Vous avez déjà un compte ?",
       "signIn": "Se connecter"
+    },
+    "forgotPassword": {
+      "title": "Mot de passe oublié",
+      "subtitle": "Entrez votre email pour recevoir un lien de réinitialisation",
+      "button": "Envoyer le lien",
+      "backToLogin": "Retour à la connexion"
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Entrez votre nouveau mot de passe",
+      "button": "Réinitialiser le mot de passe",
+      "confirmPassword": "Confirmer le mot de passe"
     }
+  },
+  "authErrors": {
+    "passwordMismatch": "Les mots de passe ne correspondent pas",
+    "passwordResetSuccess": "Mot de passe mis à jour avec succès",
+    "passwordResetSent": "Lien de réinitialisation du mot de passe envoyé à votre email."
+  },
+  "validation": {
+    "error": "Erreur de validation",
+    "requiredFields": "Veuillez remplir tous les champs obligatoires"
   },
   "common": {
     "or": "ou",
     "miles": "miles",
-    "lastCheck": "Dernier contrôle",
+    "lastCheck": "Dernière vérification",
     "healthScore": "Score de santé",
     "status": {
       "good": "Bon",
-      "warning": "Attention",
+      "warning": "Avertissement",
       "critical": "Critique"
     }
   },
@@ -44,40 +67,82 @@
   },
   "dashboard": {
     "vehicleHealth": "Santé du véhicule",
-    "upcomingMaintenance": "Entretien à venir",
+    "upcomingMaintenance": "Maintenance à venir",
     "recentActivity": "Activité récente",
-    "runDiagnostics": "Lancer les diagnostics",
-    "logMaintenance": "Enregistrer l'entretien",
+    "runDiagnostics": "Exécuter les diagnostics",
+    "logMaintenance": "Journal de maintenance",
     "daysLeft": "jours restants",
     "day": "jour",
-    "days": "jours"
+    "days": "jours",
+    "noUpcomingMaintenance": "Aucune maintenance à venir",
+    "seeAll": "Tout voir",
+    "runDiagnostics": "Exécuter les diagnostics",
+    "logMaintenance": "Journal de maintenance"
   },
   "vehicles": {
     "myVehicles": "Mes véhicules",
-    "addVehicle": "Ajouter un véhicule",
-    "serviceRequired": "Entretien requis",
+    "addVehicle": {
+      "title": "Ajouter un nouveau véhicule",
+      "make": "Marque",
+      "model": "Modèle",
+      "year": "Année",
+      "vin": "VIN (Optionnel)",
+      "nickname": "Surnom (Optionnel)",
+      "mileage": "Kilométrage actuel (Optionnel)",
+      "engineSize": "Taille du moteur (Optionnel)",
+      "fuelType": "Type de carburant (Optionnel)",
+      "transmission": "Transmission (Optionnel)",
+      "color": "Couleur (Optionnel)",
+      "licensePlate": "Plaque d'immatriculation (Optionnel)",
+      "purchaseDate": "Date d'achat (Optionnel)",
+      "purchasePrice": "Prix d'achat (Optionnel)",
+      "notes": "Notes (Optionnel)",
+      "button": "Ajouter un véhicule",
+      "error.requiredFields": "La marque, le modèle et l'année sont requis.",
+      "error.invalidYear": "Veuillez entrer une année valide entre 1900 et l'année actuelle.",
+      "error.invalidMileage": "Veuillez entrer une valeur de kilométrage valide.",
+      "error.invalidPrice": "Veuillez entrer un prix d'achat valide.",
+      "error.uploadFailed": "Échec du téléchargement de l'image",
+      "error.userNotAuthenticated": "Utilisateur non authentifié",
+      "selectImage": "Sélectionner une image",
+      "uploading": "Téléchargement en cours..."
+    },
+    "serviceRequired": "Service requis",
     "issues": "problèmes",
-    "maintenance": "Entretien",
+    "maintenance": "Maintenance",
+    "noVehicles": "Aucun véhicule trouvé",
+    "addFirstVehicle": "Ajoutez votre premier véhicule pour commencer",
     "repairs": "Réparations",
     "history": "Historique",
     "documents": "Documents",
-    "scheduleService": "Planifier l'entretien",
+    "scheduleService": "Planifier un service",
     "repairHistory": "Historique des réparations",
-    "serviceHistory": "Historique des entretiens",
+    "serviceHistory": "Historique des services",
     "viewDocuments": "Voir les documents",
     "licensePlate": "Plaque d'immatriculation",
     "color": "Couleur",
     "fuelType": "Type de carburant",
-    "transmission": "Transmission"
+    "transmission": "Transmission",
+    "purchaseDate": "Date d'achat",
+    "purchasePrice": "Prix d'achat",
+    "notes": "Notes",
+    "editVehicle": {
+      "title": "Modifier le véhicule",
+      "save": "Enregistrer les modifications",
+      "delete": "Supprimer le véhicule"
+    }
   },
+  
   "diagnostics": {
     "title": "Diagnostics",
     "obdConnection": "Connexion OBD",
     "notConnected": "Non connecté",
-    "connecting": "Connexion en cours...",
+    "connecting": "Connexion...",
     "connected": "Connecté à",
-    "connectToOBD": "Connecter à l'OBDII",
-    "runDiagnostic": "Lancer le diagnostic",
+    "connectToOBD": "Connecter à OBDII",
+    "refresh": "Actualiser les appareils",
+    "disconnect": "Déconnecter",
+    "runDiagnostic": "Exécuter le diagnostic",
     "scanning": "Analyse en cours...",
     "diagnosticResults": "Résultats du diagnostic",
     "newScan": "Nouvelle analyse",
@@ -87,15 +152,21 @@
     "recommendedActions": "Actions recommandées",
     "viewRepairGuide": "Voir le guide de réparation",
     "severity": "Gravité",
+    "bluetoothNotAvailable": "Bluetooth non disponible",
+    "bluetoothNotAvailableMessage": "Veuillez activer le Bluetooth pour vous connecter aux appareils OBD2",
+    "loadingExplanation": "Chargement de l'explication...",
+    "explanation": "Explication",
+    "startMonitoring": "Démarrer la surveillance",
+    "stopMonitoring": "Arrêter la surveillance",
     "causes": {
-      "sparkPlugs": "Bougies usées",
+      "sparkPlugs": "Bougies d'allumage usées",
       "fuelInjectors": "Injecteurs de carburant bouchés",
       "ignitionCoil": "Bobine d'allumage défectueuse",
-      "fuelPressure": "Pression de carburant faible"
+      "fuelPressure": "Basse pression de carburant"
     },
     "actions": {
-      "inspectSparkPlugs": "Inspecter et remplacer les bougies si nécessaire",
-      "checkFuelInjectors": "Nettoyer ou remplacer les injecteurs",
+      "inspectSparkPlugs": "Inspecter et remplacer les bougies d'allumage si nécessaire",
+      "checkFuelInjectors": "Nettoyer ou remplacer les injecteurs de carburant",
       "testIgnitionCoil": "Tester et remplacer la bobine d'allumage si défectueuse"
     }
   },
@@ -108,7 +179,7 @@
     "open": "Ouvert",
     "closed": "Fermé",
     "call": "Appeler",
-    "directions": "Itinéraire",
+    "directions": "Directions",
     "services": "Services"
   },
   "more": {
@@ -116,7 +187,7 @@
     "preferences": "Préférences",
     "support": "Support",
     "repairTutorials": "Tutoriels de réparation",
-    "maintenanceHistory": "Historique d'entretien",
+    "maintenanceHistory": "Historique de maintenance",
     "performanceReports": "Rapports de performance",
     "vehicleDocuments": "Documents du véhicule",
     "settings": "Paramètres",
@@ -124,20 +195,243 @@
     "privacy": "Confidentialité",
     "helpCenter": "Centre d'aide",
     "contactSupport": "Contacter le support",
-    "logout": "Déconnexion",
+    "logout": "Se déconnecter",
     "version": "Version"
   },
+  "alerts": {
+    "deleteRepair": {
+      "title": "Supprimer la réparation",
+      "message": "Êtes-vous sûr de vouloir supprimer cet enregistrement de réparation ?"
+    },
+    "deletePlan": {
+      "title": "Supprimer le plan",
+      "message": "Êtes-vous sûr de vouloir supprimer ce plan de maintenance ?"
+    },
+    "deleteVehicle": {
+      "title": "Supprimer le véhicule",
+      "message": "Êtes-vous sûr de vouloir supprimer ce véhicule ? Cette action est irréversible.",
+      "error": "Échec de la suppression du véhicule"
+    },
+    "updateVehicle": {
+      "error": "Échec de la mise à jour du véhicule"
+    }
+  },
+  "alerts": {
+    "error": "Erreur"
+  },
+  "documents": {
+    "downloadAlert": {
+      "title": "Télécharger le document",
+      "message": "Cela téléchargerait le document sélectionné dans une implémentation réelle."
+    }
+  },
+  "modals": {
+    "repairRecord": {
+      "title": {
+        "add": "Ajouter un enregistrement de réparation",
+        "edit": "Modifier l'enregistrement de réparation"
+      },
+      "repairType": "Type de réparation *",
+      "repairTypePlaceholder": "ex. Remplacement de frein, Réparation du moteur",
+      "repairDate": "Date de réparation *",
+      "status": "Statut",
+      "statusPlaceholder": "ex. terminé, en_cours, prévu",
+      "cost": "Coût",
+      "mileageAtRepair": "Kilométrage lors de la réparation",
+      "serviceProvider": "Prestataire de service",
+      "serviceProviderPlaceholder": "ex. Garage AutoCare",
+      "notes": "Notes",
+      "notesPlaceholder": "Détails sur le travail de réparation",
+      "garageName": "Nom du garage",
+      "garageNamePlaceholder": "ex. Garage AutoCare",
+      "garageAddress": "Adresse du garage",
+      "garageAddressPlaceholder": "ex. 123 Rue Principale, Ville, Département 12345",
+      "cancel": "Annuler",
+      "saveRepair": "Enregistrer la réparation"
+    },
+    "maintenanceSchedule": {
+      "title": {
+        "add": "Créer un calendrier de maintenance",
+        "edit": "Modifier le calendrier de maintenance"
+      },
+      "serviceType": "Type de service *",
+      "serviceTypePlaceholder": "ex. Changement d'huile, Rotation des pneus",
+      "scheduledDate": "Date prévue *",
+      "mileageAtSchedule": "Kilométrage lors de la planification",
+      "serviceProvider": "Prestataire de service",
+      "garageId": "ID du garage (Optionnel)",
+      "notes": "Notes",
+      "notesPlaceholder": "Détails supplémentaires sur ce calendrier de maintenance",
+      "cancel": "Annuler",
+      "saveSchedule": "Enregistrer le calendrier"
+    },
+    "maintenancePlan": {
+      "title": {
+        "add": "Créer un plan de maintenance",
+        "edit": "Modifier le plan de maintenance"
+      },
+      "planName": "Nom du plan *",
+      "planNamePlaceholder": "ex. Plan de changement d'huile",
+      "serviceType": "Type de service *",
+      "serviceTypePlaceholder": "ex. Changement d'huile, Rotation des pneus",
+      "frequencyType": "Type de fréquence",
+      "frequencyValue": "Valeur de fréquence *",
+      "startDate": "Date de début",
+      "endDate": "Date de fin (Optionnel)",
+      "notes": "Notes",
+      "notesPlaceholder": "Détails supplémentaires sur ce plan de maintenance",
+      "active": "Actif",
+      "planActive": "Le plan est actif",
+      "cancel": "Annuler",
+      "savePlan": "Enregistrer le plan"
+    }
+  },
+  "vehicleSelector": {
+    "noVehicles": "Aucun véhicule trouvé",
+    "addVehicle": "Ajouter un véhicule",
+    "selectVehicle": "Sélectionner un véhicule",
+    "close": "Fermer"
+  },
+  "settings": {
+    "preferences": "Préférences",
+    "account": "Compte",
+    "darkMode": "Mode sombre",
+    "language": "Langue",
+    "theme": "Thème"
+  },
   "maintenance": {
-    "title": "Calendrier d'entretien",
+    "title": "Calendrier de maintenance",
     "upcoming": "Services à venir",
-    "schedule": "Planifier l'entretien",
-    "addNew": "Ajouter un service",
+    "schedule": "Planifier un service",
+    "addNew": "Ajouter un nouveau service",
     "estimatedCost": "Coût estimé",
     "status": {
       "upcoming": "À venir",
       "scheduled": "Planifié",
       "overdue": "En retard",
-      "completed": "Terminé"
+      "completed": "Terminé",
+      "active": "Actif",
+      "inactive": "Inactif"
     }
+  },
+  "documents": {
+    "title": "Documents du véhicule",
+    "noDocuments": "Aucun document trouvé",
+    "addDocuments": "Ajoutez des documents pour suivre les papiers de votre véhicule",
+    "download": "Télécharger"
+  },
+  "repairs": {
+    "title": "Historique des réparations",
+    "noRepairs": "Aucun enregistrement de réparation trouvé",
+    "addRepairs": "Ajoutez des enregistrements de réparation pour suivre l'historique d'entretien de votre véhicule",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+  },
+  "plans": {
+    "title": "Plans de maintenance",
+    "noPlans": "Aucun plan de maintenance trouvé",
+    "createPlan": "Créez votre premier plan de maintenance pour suivre les services réguliers",
+    "edit": "Modifier",
+    "delete": "Supprimer"
+  },
+  "upcoming": {
+    "title": "Maintenance à venir",
+    "noUpcoming": "Aucune maintenance à venir",
+    "scheduleMaintenance": "Planifiez votre prochaine maintenance pour garder votre véhicule en bon état"
+  },
+  "performance": {
+    "title": "Rapports de performance",
+    "noReports": "Aucun rapport de performance trouvé",
+    "runDiagnostics": "Exécutez un diagnostic pour générer votre premier rapport de performance"
+  },
+  "tutorials": {
+    "title": "Tutoriels de réparation"
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "header": "Politique de confidentialité",
+    "lastUpdated": "Dernière mise à jour : 18 octobre 2025",
+    "informationCollection": {
+      "title": "Informations que nous collectons",
+      "content": "Nous collectons les informations que vous nous fournissez directement, comme lorsque vous créez un compte, utilisez nos services ou nous contactez pour obtenir de l'aide. Cela peut inclure votre nom, votre adresse e-mail, les informations sur votre véhicule et les données de diagnostic."
+    },
+    "howWeUse": {
+      "title": "Comment nous utilisons vos informations",
+      "content": "Nous utilisons les informations que nous collectons pour fournir, maintenir et améliorer nos services, pour communiquer avec vous et pour personnaliser votre expérience avec IntelliScan."
+    },
+    "dataProtection": {
+      "title": "Protection des données",
+      "content": "Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations personnelles contre tout accès non autorisé, altération, divulgation ou destruction."
+    },
+    "thirdParty": {
+      "title": "Services tiers",
+      "content": "Nous pouvons partager des informations avec des fournisseurs de services tiers qui nous aident à exploiter nos services, à mener nos activités ou à servir nos utilisateurs."
+    },
+    "yourRights": {
+      "title": "Vos droits",
+      "content": "Vous avez le droit d'accéder, de mettre à jour ou de supprimer vos informations personnelles à tout moment. Contactez-nous pour exercer ces droits."
+    },
+    "changes": {
+      "title": "Modifications de cette politique",
+      "content": "Nous pouvons mettre à jour cette politique de confidentialité de temps en temps. Nous vous informerons de tout changement en publiant la nouvelle politique sur cette page."
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "content": "Si vous avez des questions sur cette politique de confidentialité, veuillez nous contacter à privacy@intelliscan.app."
+    }
+  },
+  "help": {
+    "title": "Centre d'aide",
+    "searchPlaceholder": "Rechercher des articles d'aide...",
+    "browseTopics": "Parcourir les sujets",
+    "gettingStarted": {
+      "title": "Premiers pas",
+      "description": "Apprenez les bases de l'utilisation d'IntelliScan"
+    },
+    "vehicleSetup": {
+      "title": "Configuration du véhicule",
+      "description": "Comment ajouter et configurer vos véhicules"
+    },
+    "diagnostics": {
+      "title": "Exécution des diagnostics",
+      "description": "Guide étape par étape pour les diagnostics de véhicule"
+    },
+    "maintenance": {
+      "title": "Suivi de l'entretien",
+      "description": "Suivez et planifiez l'entretien de votre véhicule"
+    },
+    "faq": {
+      "title": "Foire aux questions",
+      "question1": "Comment connecter le port OBD de mon véhicule ?",
+      "answer1": "Localisez le port OBD de votre véhicule (généralement sous le tableau de bord), branchez votre adaptateur OBD et connectez-vous via Bluetooth grâce à l'application.",
+      "question2": "À quelle fréquence dois-je exécuter les diagnostics ?",
+      "answer2": "Nous recommandons d'exécuter les diagnostics mensuellement ou avant les longs voyages pour vous assurer que votre véhicule est en parfait état.",
+      "question3": "Que signifient les codes de diagnostic ?",
+      "answer3": "Chaque code de diagnostic indique un problème spécifique avec votre véhicule. Notre application fournit des explications détaillées pour chaque code."
+    },
+    "contact": {
+      "title": "Contacter le support",
+      "email": "support@intelliscan.app",
+      "phone": "+1 (555) 123-4567"
+    }
+  },
+  "contact": {
+    "title": "Contacter le support",
+    "header": "Contacter le support",
+    "subheader": "Nous sommes là pour vous aider ! Envoyez-nous un message et nous vous répondrons dès que possible.",
+    "namePlaceholder": "Votre nom",
+    "emailPlaceholder": "Votre email",
+    "subjectPlaceholder": "Sujet",
+    "messagePlaceholder": "Décrivez votre problème ou votre question...",
+    "sendButton": "Envoyer le message",
+    "validationError": "Erreur de validation",
+    "validationMessage": "Veuillez remplir tous les champs",
+    "successTitle": "Message envoyé",
+    "successMessage": "Merci d'avoir contacté le support. Nous vous répondrons bientôt.",
+    "alternativeTitle": "Autres moyens de nous contacter",
+    "emailLabel": "Support par email",
+    "emailValue": "support@intelliscan.app",
+    "phoneLabel": "Support téléphonique",
+    "phoneValue": "+1 (555) 123-4567"
   }
 }

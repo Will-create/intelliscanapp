@@ -1,67 +1,120 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Modal, FlatList, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Modal,
+  FlatList,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import Colors from '@/constants/Colors';
 import { ChevronDown, Check } from 'lucide-react-native';
+import { supabase } from '@/utils/supabase';
+import { useAuth } from '@/hooks/useAuth';
+
+interface Vehicle {
+  id: number;
+  name: string;
+  make: string;
+  model: string;
+  year: number;
+  image?: string;
+  nickname?: string;
+}
 
 export function VehicleSelector() {
+  const { session } = useAuth();
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedVehicle, setSelectedVehicle] = useState({
-    id: '1',
-    name: 'Toyota Camry',
-    make: 'Toyota',
-    model: 'Camry',
-    year: 2019,
-    image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg',
-  });
-  
-  const vehicles = [
-    {
-      id: '1',
-      name: 'Toyota Camry',
-      make: 'Toyota',
-      model: 'Camry',
-      year: 2019,
-      image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg',
-    },
-    {
-      id: '2',
-      name: 'Honda Accord',
-      make: 'Honda',
-      model: 'Accord',
-      year: 2017,
-      image: 'https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg',
-    },
-    {
-      id: '3',
-      name: 'Ford F-150',
-      make: 'Ford',
-      model: 'F-150',
-      year: 2020,
-      image: 'https://images.pexels.com/photos/2882234/pexels-photo-2882234.jpeg',
+  const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (session) {
+      fetchVehicles();
     }
-  ];
-  
-  const handleSelectVehicle = (vehicle) => {
+  }, [session]);
+
+  const fetchVehicles = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('vehicles')
+        .select('*')
+        .eq('user_id', session?.user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching vehicles:', error.message);
+      } else {
+        const vehicleData = data.map(vehicle => ({
+          id: vehicle.id,
+          name: vehicle.nickname || `${vehicle.year} ${vehicle.make} ${vehicle.model}`,
+          make: vehicle.make,
+          model: vehicle.model,
+          year: vehicle.year,
+          image: vehicle.image || 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg',
+        }));
+        
+        setVehicles(vehicleData);
+        
+        // Set first vehicle as selected by default
+        if (vehicleData.length > 0 && !selectedVehicle) {
+          setSelectedVehicle(vehicleData[0]);
+        }
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSelectVehicle = (vehicle: Vehicle) => {
     setSelectedVehicle(vehicle);
     setModalVisible(false);
   };
-  
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="small" color={Colors.accent} />
+      </View>
+    );
+  }
+
+  if (!selectedVehicle) {
+    return (
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyText}>No vehicles found</Text>
+        <TouchableOpacity style={styles.addButton}>
+          <Text style={styles.addButtonText}>Add Vehicle</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
     <>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.selector}
         onPress={() => setModalVisible(true)}
       >
-        <Image source={{ uri: selectedVehicle.image }} style={styles.vehicleImage} />
+        <Image
+          source={{ uri: selectedVehicle.image }}
+          style={styles.vehicleImage}
+        />
         <View style={styles.vehicleInfo}>
           <Text style={styles.vehicleName}>{selectedVehicle.name}</Text>
           <Text style={styles.vehicleDetails}>
-            {selectedVehicle.year} {selectedVehicle.make} {selectedVehicle.model}
+            {selectedVehicle.year} {selectedVehicle.make}{' '}
+            {selectedVehicle.model}
           </Text>
         </View>
         <ChevronDown size={20} color={Colors.textSecondary} />
       </TouchableOpacity>
-      
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -72,23 +125,26 @@ export function VehicleSelector() {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Select Vehicle</Text>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.closeButton}
                 onPress={() => setModalVisible(false)}
               >
                 <Text style={styles.closeButtonText}>Close</Text>
               </TouchableOpacity>
             </View>
-            
+
             <FlatList
               data={vehicles}
-              keyExtractor={item => item.id}
+              keyExtractor={(item) => item.id.toString()}
               renderItem={({ item }) => (
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.vehicleItem}
                   onPress={() => handleSelectVehicle(item)}
                 >
-                  <Image source={{ uri: item.image }} style={styles.vehicleItemImage} />
+                  <Image
+                    source={{ uri: item.image }}
+                    style={styles.vehicleItemImage}
+                  />
                   <View style={styles.vehicleItemInfo}>
                     <Text style={styles.vehicleItemName}>{item.name}</Text>
                     <Text style={styles.vehicleItemDetails}>
@@ -112,6 +168,39 @@ export function VehicleSelector() {
 }
 
 const styles = StyleSheet.create({
+  loadingContainer: {
+    backgroundColor: Colors.white,
+    borderRadius: 16,
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80,
+  },
+  emptyContainer: {
+    backgroundColor: Colors.white,
+    borderRadius: 16,
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80,
+  },
+  emptyText: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 16,
+    color: Colors.textSecondary,
+  },
+  addButton: {
+    marginTop: 8,
+    backgroundColor: Colors.accent,
+    borderRadius: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  addButtonText: {
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 14,
+    color: Colors.white,
+  },
   selector: {
     flexDirection: 'row',
     alignItems: 'center',

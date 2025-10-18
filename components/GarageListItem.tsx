@@ -18,45 +18,54 @@ interface GarageListItemProps {
   isSelected: boolean;
 }
 
-export function GarageListItem({ garage, onPress, isSelected }: GarageListItemProps) {
+export function GarageListItem({
+  garage,
+  onPress,
+  isSelected,
+}: GarageListItemProps) {
   const { t } = useTranslation();
 
   return (
-    <TouchableOpacity 
-      style={[
-        styles.container,
-        isSelected && styles.selectedContainer
-      ]}
+    <TouchableOpacity
+      style={[styles.container, isSelected && styles.selectedContainer]}
       onPress={onPress}
     >
       <View style={styles.content}>
         <View style={styles.nameSection}>
           <Text style={styles.garageName}>{garage.name}</Text>
-          <View style={[
-            styles.statusBadge, 
-            { backgroundColor: garage.isOpen ? Colors.success + '20' : Colors.error + '20' }
-          ]}>
-            <Text style={[
-              styles.statusText,
-              { color: garage.isOpen ? Colors.success : Colors.error }
-            ]}>
+          <View
+            style={[
+              styles.statusBadge,
+              {
+                backgroundColor: garage.isOpen
+                  ? Colors.success + '20'
+                  : Colors.error + '20',
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.statusText,
+                { color: garage.isOpen ? Colors.success : Colors.error },
+              ]}
+            >
               {garage.isOpen ? t('garages.open') : t('garages.closed')}
             </Text>
           </View>
         </View>
-        
+
         <View style={styles.ratingSection}>
           <Star size={16} color={Colors.accent} fill={Colors.accent} />
           <Text style={styles.ratingText}>
             {garage.rating} ({garage.reviews} {t('garages.reviews')})
           </Text>
         </View>
-        
+
         <View style={styles.locationSection}>
           <MapPin size={16} color={Colors.textSecondary} />
           <Text style={styles.distanceText}>{garage.distance} mi away</Text>
         </View>
-        
+
         <View style={styles.servicesSection}>
           {garage.services.slice(0, 3).map((service, index) => (
             <View key={index} style={styles.serviceTag}>
@@ -64,7 +73,9 @@ export function GarageListItem({ garage, onPress, isSelected }: GarageListItemPr
             </View>
           ))}
           {garage.services.length > 3 && (
-            <Text style={styles.moreText}>+{garage.services.length - 3} more</Text>
+            <Text style={styles.moreText}>
+              +{garage.services.length - 3} more
+            </Text>
           )}
         </View>
       </View>

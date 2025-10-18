@@ -1,77 +1,111 @@
+import { Auth } from '@/components/Auth';
 import { Tabs } from 'expo-router';
 import { Platform, StyleSheet, View } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useTranslation } from 'react-i18next';
 import Colors from '@/constants/Colors';
-import { Cylinder as GaugeCylinder, Car, Wrench, MapPin, Menu } from 'lucide-react-native';
+import {
+  Cylinder as GaugeCylinder,
+  Car,
+  Wrench,
+  MapPin,
+  Menu,
+} from 'lucide-react-native';
 
 export default function TabLayout() {
   const { t } = useTranslation();
 
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: true,
-        tabBarActiveTintColor: Colors.accent,
-        tabBarInactiveTintColor: Colors.text,
-        tabBarLabelStyle: styles.tabBarLabel,
-        tabBarStyle: styles.tabBar,
-        tabBarBackground: () => (
-          Platform.OS === 'ios' ? (
-            <BlurView intensity={80} style={styles.blurView} tint="light" />
-          ) : (
-            <View style={styles.androidTabBar} />
-          )
-        ),
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: t('tabs.dashboard'),
-          tabBarIcon: ({ color, size }) => (
-            <GaugeCylinder size={size} color={color} />
-          ),
+    <Auth>
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: true,
+          tabBarActiveTintColor: Colors.accent,
+          tabBarInactiveTintColor: Colors.text,
+          tabBarLabelStyle: styles.tabBarLabel,
+          tabBarStyle: styles.tabBar,
+          tabBarBackground: () =>
+            Platform.OS === 'ios' ? (
+              <BlurView intensity={80} style={styles.blurView} tint="light" />
+            ) : (
+              <View style={styles.androidTabBar} />
+            ),
         }}
-      />
-      <Tabs.Screen
-        name="vehicles"
-        options={{
-          title: t('tabs.vehicles'),
-          tabBarIcon: ({ color, size }) => (
-            <Car size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="diagnostics"
-        options={{
-          title: t('tabs.diagnostics'),
-          tabBarIcon: ({ color, size }) => (
-            <Wrench size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="garages"
-        options={{
-          title: t('tabs.garages'),
-          tabBarIcon: ({ color, size }) => (
-            <MapPin size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="more"
-        options={{
-          title: t('tabs.more'),
-          tabBarIcon: ({ color, size }) => (
-            <Menu size={size} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: t('tabs.dashboard'),
+            tabBarIcon: ({ color, size }) => (
+              <GaugeCylinder size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="vehicles"
+          options={{
+            title: t('tabs.vehicles'),
+            tabBarIcon: ({ color, size }) => <Car size={size} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="diagnostics"
+          options={{
+            title: t('tabs.diagnostics'),
+            tabBarIcon: ({ color, size }) => (
+              <Wrench size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="garages"
+          options={{
+            title: t('tabs.garages'),
+            tabBarIcon: ({ color, size }) => (
+              <MapPin size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="more"
+          options={{
+            title: t('tabs.more'),
+            tabBarIcon: ({ color, size }) => <Menu size={size} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="tutorials"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="privacy"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="help"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="contact"
+          options={{
+            href: null,
+          }}
+        />
+      </Tabs>
+    </Auth>
   );
 }
 
