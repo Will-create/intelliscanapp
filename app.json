@@ -13,7 +13,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -21,16 +23,25 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.jpg",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nabaloumlouis.barkwendevehicleapp"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.jpg"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "30014b49-ba3b-4fd5-9249-8981968a3a20"
+      }
     }
   }
 }
